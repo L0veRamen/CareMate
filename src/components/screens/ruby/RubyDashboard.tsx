@@ -20,6 +20,7 @@ export function RubyDashboard({ onNavigate }: RubyDashboardProps) {
   const [showBreathing, setShowBreathing] = useState(false);
   const t = getTranslation(language);
   const p = t.personas.ruby;
+  const breathingContent = t.features.breathingExercise;
   const todayLabel = formatDashboardDate(language);
 
   return (
@@ -160,6 +161,7 @@ export function RubyDashboard({ onNavigate }: RubyDashboardProps) {
             <DialogTitle>{p.breathingTitle}</DialogTitle>
           </DialogHeader>
           <BreathingExercise 
+            content={breathingContent}
             onComplete={() => {
               setTimeout(() => setShowBreathing(false), 2000);
             }}

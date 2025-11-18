@@ -483,6 +483,54 @@ export interface Translations {
     };
   };
 
+  // Feature-specific translations
+  features: {
+    breathingExercise: {
+      title: string;
+      technique: string;
+      cyclesLabel: string;
+      phases: Record<
+        'inhale' | 'hold' | 'exhale' | 'rest',
+        {
+          label: string;
+          instruction: string;
+        }
+      >;
+      controls: {
+        start: string;
+        resume: string;
+        pause: string;
+      };
+      benefitsTitle: string;
+      benefits: string[];
+    };
+    pomodoroTimer: {
+      sessions: {
+        focus: { label: string; emoji: string };
+        shortBreak: { label: string; emoji: string };
+        longBreak: { label: string; emoji: string };
+      };
+      statsLabel: string;
+      stateReady: string;
+      stateInProgress: string;
+      start: string;
+      pause: string;
+      skipTo: string;
+      quickSessions: {
+        focus: string;
+        short: string;
+        long: string;
+      };
+      tipsTitle: string;
+      tips: string[];
+      notifications: {
+        title: string;
+        focusComplete: string;
+        breakComplete: string;
+      };
+    };
+  };
+
   nav: {
     home: string;
     trends: string;
@@ -1087,6 +1135,73 @@ export const translations: Record<Language, Translations> = {
       },
     },
 
+    features: {
+      breathingExercise: {
+        title: "Breathing Exercise",
+        technique: "4-7-8 Technique",
+        cyclesLabel: "cycles",
+        phases: {
+          inhale: {
+            label: "Breathe In",
+            instruction: "Inhale deeply through your nose",
+          },
+          hold: {
+            label: "Hold",
+            instruction: "Hold your breath gently",
+          },
+          exhale: {
+            label: "Breathe Out",
+            instruction: "Exhale slowly through your mouth",
+          },
+          rest: {
+            label: "Rest",
+            instruction: "Relax for a moment",
+          },
+        },
+        controls: {
+          start: "Start",
+          resume: "Resume",
+          pause: "Pause",
+        },
+        benefitsTitle: "Benefits:",
+        benefits: [
+          "• Reduces anxiety and stress",
+          "• Lowers heart rate and blood pressure",
+          "• Improves focus and mental clarity",
+          "• Helps with sleep when done before bed",
+        ],
+      },
+      pomodoroTimer: {
+        sessions: {
+          focus: { label: "Focus Time", emoji: "📚" },
+          shortBreak: { label: "Short Break", emoji: "☕" },
+          longBreak: { label: "Long Break", emoji: "🎉" },
+        },
+        statsLabel: "{count} focus sessions completed today",
+        stateReady: "Ready",
+        stateInProgress: "In Progress",
+        start: "Start",
+        pause: "Pause",
+        skipTo: "Skip to {label}",
+        quickSessions: {
+          focus: "Focus",
+          short: "Short",
+          long: "Long",
+        },
+        tipsTitle: "Study Tips:",
+        tips: [
+          "• Eliminate distractions during focus time",
+          "• Take breaks seriously - move around!",
+          "• After 4 pomodoros, take a longer break",
+          "• Track what you accomplished each session",
+        ],
+        notifications: {
+          title: "Pomodoro Timer",
+          focusComplete: "Time for a break!",
+          breakComplete: "Ready to focus?",
+        },
+      },
+    },
     nav: {
       home: "Home",
       trends: "Trends",
@@ -1689,6 +1804,74 @@ export const translations: Record<Language, Translations> = {
             question: "Au moins 20 minutes d'activité",
             detail: "Sport, marche, vélo, danse - tout compte !",
           },
+        },
+      },
+    },
+
+    features: {
+      breathingExercise: {
+        title: "Respiration guidée",
+        technique: "Technique 4-7-8",
+        cyclesLabel: "cycles",
+        phases: {
+          inhale: {
+            label: "Inspirez",
+            instruction: "Inspirez profondément par le nez",
+          },
+          hold: {
+            label: "Retenez",
+            instruction: "Retenez votre souffle en douceur",
+          },
+          exhale: {
+            label: "Expirez",
+            instruction: "Relâchez l'air lentement par la bouche",
+          },
+          rest: {
+            label: "Repos",
+            instruction: "Relâchez-vous un instant",
+          },
+        },
+        controls: {
+          start: "Commencer",
+          resume: "Reprendre",
+          pause: "Pause",
+        },
+        benefitsTitle: "Bénéfices :",
+        benefits: [
+          "• Réduit l'anxiété et le stress",
+          "• Diminue la fréquence cardiaque et la tension artérielle",
+          "• Améliore la concentration et la clarté mentale",
+          "• Favorise le sommeil si pratiqué avant le coucher",
+        ],
+      },
+      pomodoroTimer: {
+        sessions: {
+          focus: { label: "Temps de concentration", emoji: "📚" },
+          shortBreak: { label: "Pause courte", emoji: "☕" },
+          longBreak: { label: "Pause longue", emoji: "🎉" },
+        },
+        statsLabel: "{count} sessions de concentration terminées aujourd'hui",
+        stateReady: "Prêt",
+        stateInProgress: "En cours",
+        start: "Démarrer",
+        pause: "Pause",
+        skipTo: "Passer à {label}",
+        quickSessions: {
+          focus: "Focus",
+          short: "Courte",
+          long: "Longue",
+        },
+        tipsTitle: "Conseils d'étude :",
+        tips: [
+          "• Éliminez les distractions pendant vos périodes de focus",
+          "• Profitez des pauses : bougez et étirez-vous",
+          "• Après 4 pomodoros, accordez-vous une pause plus longue",
+          "• Note ce que tu accomplis à chaque session",
+        ],
+        notifications: {
+          title: "Minuteur Pomodoro",
+          focusComplete: "C'est l'heure de faire une pause !",
+          breakComplete: "Prêt à te reconcentrer ?",
         },
       },
     },

@@ -21,6 +21,7 @@ export function LeoDashboard({ onNavigate }: LeoDashboardProps) {
   const [showPomodoro, setShowPomodoro] = useState(false);
   const t = getTranslation(language);
   const p = t.personas.leo;
+  const pomodoroContent = t.features.pomodoroTimer;
   const todayLabel = formatDashboardDate(language);
 
   return (
@@ -161,6 +162,7 @@ export function LeoDashboard({ onNavigate }: LeoDashboardProps) {
             <DialogTitle>{p.pomodoroTitle}</DialogTitle>
           </DialogHeader>
           <PomodoroTimer 
+            content={pomodoroContent}
             onSessionComplete={() => {
               // Could add achievement tracking here
             }}
