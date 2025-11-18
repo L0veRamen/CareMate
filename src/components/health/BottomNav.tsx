@@ -1,4 +1,3 @@
-import React from 'react';
 import { Home, TrendingUp, FileText } from 'lucide-react';
 
 interface BottomNavProps {

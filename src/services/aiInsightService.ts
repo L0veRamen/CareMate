@@ -194,7 +194,7 @@ Limitez chaque section à une phrase. Soyez encourageant et pratique. Concentrez
 
   // Mock insight for development/testing without API
   generateMockInsight(
-    profile: UserProfile,
+    _profile: UserProfile,
     summary: WeekSummary,
     language: Language = 'en'
   ): AIInsight {

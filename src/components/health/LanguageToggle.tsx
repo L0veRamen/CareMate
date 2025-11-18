@@ -1,4 +1,3 @@
-import React from 'react';
 
 interface LanguageToggleProps {
   activeLanguage: 'en' | 'fr';

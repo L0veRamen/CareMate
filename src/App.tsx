@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext } from 'react';
+import { useState, useEffect, createContext, useContext } from 'react';
 import { LanguageSelection } from './components/screens/LanguageSelection';
 import { OnboardingWelcome } from './components/screens/OnboardingWelcome';
 import { AndreDashboard } from './components/screens/andre/AndreDashboard';
@@ -23,7 +23,6 @@ import { storageService } from './services/storageService';
 import { analysisEngine } from './services/analysisEngine';
 import { aiInsightService } from './services/aiInsightService';
 import { pdfExportService } from './services/pdfExportService';
-import { PERSONAS } from './services/personaData';
 import type { UserProfile, HealthData, Alert, Recommendation, WeekSummary, AIInsight, Language } from './services/types';
 
 // Create Context for global app state
@@ -53,7 +52,6 @@ export const useApp = () => {
 
 type Screen = 
   | 'language'
-  | 'persona-select'
   | 'onboarding'
   | 'andre-dashboard'
   | 'andre-log'
@@ -275,8 +273,8 @@ export default function App() {
     }
   };
 
-  const handleNavigation = (target: Screen) => {
-    setScreen(target);
+  const handleNavigation = (target: string) => {
+    setScreen(target as Screen);
   };
 
   const handleReset = () => {
@@ -403,7 +401,6 @@ export default function App() {
         <AndreLogData
           onBack={() => setScreen('andre-dashboard')}
           onSave={() => setScreen('andre-dashboard')}
-          language={language}
         />
       )}
       {screen === 'andre-trends' && (
@@ -429,7 +426,7 @@ export default function App() {
       )}
       {screen === 'ruby-profile' && (
         <RubyProfile
-          onBack={() => setScreen('persona-select')}
+          onBack={() => setScreen('language')}
           onComplete={() => setScreen('ruby-dashboard')}
         />
       )}
@@ -459,7 +456,7 @@ export default function App() {
       )}
 
       {/* Reset button - fixed in top right */}
-      {screen !== 'language' && screen !== 'persona-select' && (
+      {screen !== 'language' && (
         <button
           onClick={handleReset}
           className="fixed top-4 right-4 px-4 py-2 bg-white border border-[#E5E7EB] rounded-lg text-sm text-gray-600 hover:text-gray-900 hover:border-gray-400 transition-all shadow-sm z-50"

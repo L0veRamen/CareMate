@@ -1,4 +1,3 @@
-import React from 'react';
 import { HealthButton } from '../../health/HealthButton';
 import { HealthCard } from '../../health/HealthCard';
 import { BottomNav } from '../../health/BottomNav';

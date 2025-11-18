@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { HealthButton } from '../../health/HealthButton';
 import { HealthInput } from '../../health/HealthInput';
 import { HealthCard } from '../../health/HealthCard';

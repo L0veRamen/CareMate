@@ -1,8 +1,7 @@
-import React from 'react';
 import { HealthButton } from '../../health/HealthButton';
 import { HealthCard } from '../../health/HealthCard';
 import { BottomNav } from '../../health/BottomNav';
-import { Download, TrendingUp } from 'lucide-react';
+import { Download } from 'lucide-react';
 import { useApp } from '../../../App';
 import { getTranslation } from '../../../services/translations';
 

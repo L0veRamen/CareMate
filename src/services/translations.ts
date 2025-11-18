@@ -67,6 +67,7 @@ export interface Translations {
     sessions: string;
     hrsDay: string;
     minDay: string;
+    years: string;
   };
 
   // Stats
@@ -606,6 +607,7 @@ export const translations: Record<Language, Translations> = {
       sessions: "sessions",
       hrsDay: "hrs/day",
       minDay: "min/day",
+      years: "years",
     },
 
     // Stats
@@ -1277,6 +1279,7 @@ export const translations: Record<Language, Translations> = {
       sessions: "séances",
       hrsDay: "h/jour",
       minDay: "min/jour",
+      years: "ans",
     },
 
     // Stats

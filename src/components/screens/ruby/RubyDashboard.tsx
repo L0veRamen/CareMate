@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MetricDisplay } from '../../health/MetricDisplay';
 import { RecommendationCard } from '../../health/RecommendationCard';
 import { AlertBanner } from '../../health/AlertBanner';

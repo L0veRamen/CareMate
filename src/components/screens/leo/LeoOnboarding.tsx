@@ -1,4 +1,3 @@
-import React from 'react';
 import { HealthButton } from '../../health/HealthButton';
 import { Shield, Lock, Eye } from 'lucide-react';
 

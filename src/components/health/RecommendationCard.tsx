@@ -1,4 +1,3 @@
-import React from 'react';
 import { BookOpen } from 'lucide-react';
 import { HealthCard } from './HealthCard';
 
@@ -8,7 +7,6 @@ interface RecommendationCardProps {
   action: string;
   rationale: string;
   onLearnMore?: () => void;
-  accentColor?: string;
 }
 
 /**
@@ -26,7 +24,6 @@ export function RecommendationCard({
   action,
   rationale,
   onLearnMore,
-  accentColor,
 }: RecommendationCardProps) {
   return (
     <HealthCard>

@@ -456,7 +456,7 @@ class PDFExportService {
                     </tr>
                 </thead>
                 <tbody>
-                    ${healthData.slice(0, 30).reverse().map((data, index) => {
+                    ${healthData.slice(0, 30).reverse().map((data) => {
                       const date = new Date(data.date);
                       const formattedDate = date.toISOString().split('T')[0];
                       return `

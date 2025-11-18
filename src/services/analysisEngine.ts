@@ -3,8 +3,7 @@ import type {
   Alert, 
   Recommendation, 
   WeekSummary, 
-  TrendDirection, 
-  AlertSeverity,
+  TrendDirection,
   Language 
 } from './types';
 
@@ -206,9 +205,9 @@ class AnalysisEngine {
 
   // Generate personalized recommendations
   generateRecommendations(
-    data: HealthData[], 
+    _data: HealthData[], 
     summary: WeekSummary, 
-    alerts: Alert[],
+    _alerts: Alert[],
     language: Language = 'en'
   ): Recommendation[] {
     const recommendations: Recommendation[] = [];
