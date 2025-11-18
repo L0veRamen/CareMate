@@ -1,7 +1,6 @@
 import { HealthCard } from '../../health/HealthCard';
 import { BottomNav } from '../../health/BottomNav';
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
-import { useApp } from '../../../App';
 import { getTranslation } from '../../../services/translations';
 
 interface AndreTrendsProps {
