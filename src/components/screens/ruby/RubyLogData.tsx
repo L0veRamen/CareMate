@@ -3,6 +3,8 @@ import { HealthButton } from '../../health/HealthButton';
 import { HealthCard } from '../../health/HealthCard';
 import { ArrowLeft } from 'lucide-react';
 import { Slider } from '../../ui/slider';
+import { useApp } from '../../../App';
+import { getTranslation } from '../../../services/translations';
 
 interface RubyLogDataProps {
   onBack: () => void;
@@ -10,12 +12,14 @@ interface RubyLogDataProps {
 }
 
 export function RubyLogData({ onBack, onSave }: RubyLogDataProps) {
+  const { language } = useApp();
+  const t = getTranslation(language);
+  const log = t.personas.ruby.log;
   const [stress, setStress] = useState([5]);
   const [sleep, setSleep] = useState([7]);
   const [activity, setActivity] = useState(false);
   const [mindfulness, setMindfulness] = useState([10]);
-  
-  const stressLabels = ['Very Low', 'Low', 'Medium', 'High', 'Very High'];
+  const stressLabels = log.stress.labels;
   
   const handleSave = () => {
     onSave();
@@ -29,7 +33,7 @@ export function RubyLogData({ onBack, onSave }: RubyLogDataProps) {
           <button onClick={onBack} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
             <ArrowLeft className="w-6 h-6 text-gray-900" />
           </button>
-          <h1 className="text-gray-900">Log Your Day</h1>
+          <h1 className="text-gray-900">{log.title}</h1>
         </div>
       </div>
       
@@ -37,10 +41,10 @@ export function RubyLogData({ onBack, onSave }: RubyLogDataProps) {
       <div className="max-w-md mx-auto px-6 py-6 space-y-6">
         <HealthCard>
           <div className="space-y-4">
-            <h3 className="text-gray-900 mb-4">😌 Stress Level</h3>
+            <h3 className="text-gray-900 mb-4">{log.stress.title}</h3>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-gray-600">How stressed are you?</span>
+                <span className="text-gray-600">{log.stress.question}</span>
                 <span className="text-xl text-[#2563EB]">{stressLabels[stress[0] - 1]}</span>
               </div>
               <Slider
@@ -62,11 +66,13 @@ export function RubyLogData({ onBack, onSave }: RubyLogDataProps) {
         
         <HealthCard>
           <div className="space-y-4">
-            <h3 className="text-gray-900 mb-4">😴 Sleep Duration</h3>
+            <h3 className="text-gray-900 mb-4">{log.sleep.title}</h3>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-gray-600">Hours slept</span>
-                <span className="text-2xl text-[#2563EB]">{sleep[0]}h</span>
+                <span className="text-gray-600">{log.sleep.label}</span>
+                <span className="text-2xl text-[#2563EB]">
+                  {sleep[0]} {t.units.hours}
+                </span>
               </div>
               <Slider
                 value={sleep}
@@ -77,13 +83,13 @@ export function RubyLogData({ onBack, onSave }: RubyLogDataProps) {
                 className="w-full"
               />
             </div>
-            <p className="text-xs text-gray-600">Recommended: 7-9 hours</p>
+            <p className="text-xs text-gray-600">{log.sleep.recommended}</p>
           </div>
         </HealthCard>
         
         <HealthCard>
           <div className="space-y-4">
-            <h3 className="text-gray-900 mb-4">💪 Physical Activity</h3>
+            <h3 className="text-gray-900 mb-4">{log.activity.title}</h3>
             <button
               onClick={() => setActivity(!activity)}
               className={`w-full p-4 rounded-lg border-2 transition-all ${
@@ -93,21 +99,23 @@ export function RubyLogData({ onBack, onSave }: RubyLogDataProps) {
               }`}
             >
               <div className="flex items-center justify-between">
-                <span className="text-gray-900">Did you exercise today?</span>
+                <span className="text-gray-900">{log.activity.question}</span>
                 <span className="text-2xl">{activity ? '✅' : '⬜'}</span>
               </div>
             </button>
-            <p className="text-xs text-gray-600">At least 20 minutes of moderate activity</p>
+            <p className="text-xs text-gray-600">{log.activity.guidance}</p>
           </div>
         </HealthCard>
         
         <HealthCard>
           <div className="space-y-4">
-            <h3 className="text-gray-900 mb-4">🧘 Mindfulness Practice</h3>
+            <h3 className="text-gray-900 mb-4">{log.mindfulness.title}</h3>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-gray-600">Minutes practiced</span>
-                <span className="text-2xl text-[#2563EB]">{mindfulness[0]} min</span>
+                <span className="text-gray-600">{log.mindfulness.label}</span>
+                <span className="text-2xl text-[#2563EB]">
+                  {mindfulness[0]} {t.units.minutes}
+                </span>
               </div>
               <Slider
                 value={mindfulness}
@@ -118,7 +126,7 @@ export function RubyLogData({ onBack, onSave }: RubyLogDataProps) {
                 className="w-full"
               />
             </div>
-            <p className="text-xs text-gray-600">Goal: 10 minutes daily</p>
+            <p className="text-xs text-gray-600">{log.mindfulness.goal}</p>
           </div>
         </HealthCard>
         
@@ -128,14 +136,14 @@ export function RubyLogData({ onBack, onSave }: RubyLogDataProps) {
             onClick={onBack}
             className="w-full"
           >
-            Cancel
+            {t.cancel}
           </HealthButton>
           <HealthButton
             variant="primary"
             onClick={handleSave}
             className="w-full"
           >
-            Save
+            {t.save}
           </HealthButton>
         </div>
       </div>

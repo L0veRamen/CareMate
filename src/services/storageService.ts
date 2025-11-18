@@ -58,8 +58,11 @@ class StorageService {
       // Save the persona's health data
       this.saveHealthData(persona.healthData);
       
-      // Set the language
-      this.setLanguage(persona.language);
+      // Set the language only if the user hasn't selected one yet
+      const userHasPreference = localStorage.getItem(STORAGE_KEYS.LANGUAGE) !== null;
+      if (!userHasPreference) {
+        this.setLanguage(persona.language);
+      }
     }
   }
 

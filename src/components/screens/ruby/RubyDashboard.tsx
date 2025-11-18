@@ -6,21 +6,37 @@ import { HealthButton } from '../../health/HealthButton';
 import { BottomNav } from '../../health/BottomNav';
 import { BreathingExercise } from '../../features/BreathingExercise';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../../ui/dialog';
+import { LanguageToggle } from '../../health/LanguageToggle';
+import { useApp } from '../../../App';
+import { getTranslation } from '../../../services/translations';
+import { formatDashboardDate } from '../../../utils/date';
 
 interface RubyDashboardProps {
   onNavigate: (screen: string) => void;
 }
 
 export function RubyDashboard({ onNavigate }: RubyDashboardProps) {
+  const { language, setLanguage } = useApp();
   const [showBreathing, setShowBreathing] = useState(false);
+  const t = getTranslation(language);
+  const p = t.personas.ruby;
+  const todayLabel = formatDashboardDate(language);
 
   return (
     <div className="min-h-screen bg-[#F9FAFB] pb-[88px]">
       {/* Header */}
       <div className="bg-white border-b border-[#E5E7EB] px-6 py-6">
         <div className="max-w-md mx-auto">
-          <h1 className="text-gray-900 mb-1">Hey Ruby! 👋</h1>
-          <p className="text-sm text-gray-600">Sunday, October 5, 2025</p>
+          <div className="flex items-start justify-between mb-4">
+            <div className="flex-1">
+              <h1 className="text-gray-900 mb-1">{p.greeting}</h1>
+              <p className="text-sm text-gray-600">{todayLabel}</p>
+            </div>
+            <LanguageToggle 
+              activeLanguage={language}
+              onLanguageChange={setLanguage}
+            />
+          </div>
         </div>
       </div>
       
@@ -28,14 +44,14 @@ export function RubyDashboard({ onNavigate }: RubyDashboardProps) {
       <div className="max-w-md mx-auto px-6 py-6 space-y-6">
         {/* Alert */}
         <AlertBanner type="info">
-          Your stress levels have been elevated for 3 consecutive days. Try the breathing exercise below.
+          {p.alert}
         </AlertBanner>
         
         {/* Metrics Grid */}
         <div className="grid grid-cols-2 gap-4">
           <MetricDisplay
             icon="😌"
-            label="Stress Level"
+            label={t.metrics.stress}
             value="7/10"
             status="warning"
             trend="up"
@@ -43,27 +59,27 @@ export function RubyDashboard({ onNavigate }: RubyDashboardProps) {
           />
           <MetricDisplay
             icon="😴"
-            label="Sleep Quality"
+            label={t.metrics.sleep}
             value="6.2"
-            unit="hours"
+            unit={t.units.hours}
             status="warning"
             trend="down"
             trendPercentage="-12%"
           />
           <MetricDisplay
             icon="💪"
-            label="Exercise"
+            label={t.metrics.activity}
             value="3"
-            unit="sessions"
+            unit={t.units.sessions}
             status="normal"
             trend="up"
             trendPercentage="+1"
           />
           <MetricDisplay
             icon="🧘"
-            label="Mindfulness"
+            label={t.metrics.mindfulness}
             value="8"
-            unit="min/day"
+            unit={t.units.minDay}
             status="warning"
             trend="down"
             trendPercentage="-33%"
@@ -72,7 +88,7 @@ export function RubyDashboard({ onNavigate }: RubyDashboardProps) {
 
         {/* Quick Actions */}
         <div className="space-y-3">
-          <h2 className="text-gray-900">Quick Relief</h2>
+          <h2 className="text-gray-900">{p.quickRelief}</h2>
           
           <HealthButton
             size="large"
@@ -80,7 +96,7 @@ export function RubyDashboard({ onNavigate }: RubyDashboardProps) {
             onClick={() => setShowBreathing(true)}
             className="w-full"
           >
-            🌬️ Start Breathing Exercise
+            🌬️ {p.startBreathing}
           </HealthButton>
           
           <HealthButton
@@ -89,40 +105,40 @@ export function RubyDashboard({ onNavigate }: RubyDashboardProps) {
             onClick={() => onNavigate('ruby-log')}
             className="w-full"
           >
-            📝 Log Wellness Data
+            📝 {p.logWellness}
           </HealthButton>
         </div>
         
         {/* Recommendations */}
         <div className="space-y-4">
-          <h2 className="text-gray-900">Today's Recommendations</h2>
+          <h2 className="text-gray-900">{t.topRecommendations}</h2>
           
           <RecommendationCard
             emoji="🧘‍♀️"
-            category="Stress Management"
-            action="Practice the 4-7-8 breathing technique when you feel overwhelmed"
-            rationale="Your stress levels have been high for 3 days. This breathing exercise activates your parasympathetic nervous system, reducing cortisol and promoting calm."
+            category={t.recommendationCategories.stress}
+            action={p.recommendations.stress.action}
+            rationale={p.recommendations.stress.rationale}
           />
           
           <RecommendationCard
             emoji="💤"
-            category="Sleep Hygiene"
-            action="Aim for 7-8 hours of sleep tonight by going to bed at 10:30 PM"
-            rationale="You've averaged only 6.2 hours this week. Poor sleep increases stress hormones and reduces cognitive performance at work."
+            category={t.recommendationCategories.sleep}
+            action={p.recommendations.sleep.action}
+            rationale={p.recommendations.sleep.rationale}
           />
           
           <RecommendationCard
             emoji="🚶‍♀️"
-            category="Movement Break"
-            action="Take a 10-minute walk during your lunch break"
-            rationale="Even brief outdoor activity reduces stress and improves afternoon focus. You have no family doctor, so prevention is key."
+            category={p.recommendations.movement.category}
+            action={p.recommendations.movement.action}
+            rationale={p.recommendations.movement.rationale}
           />
           
           <RecommendationCard
             emoji="📱"
-            category="Digital Wellness"
-            action="Set 'Do Not Disturb' from 9 PM onwards"
-            rationale="Blue light and notifications before bed disrupt sleep quality. Your sleep scores dropped when you used your phone late."
+            category={p.recommendations.digital.category}
+            action={p.recommendations.digital.action}
+            rationale={p.recommendations.digital.rationale}
           />
         </div>
       </div>
@@ -134,18 +150,14 @@ export function RubyDashboard({ onNavigate }: RubyDashboardProps) {
           if (tab === 'trends') onNavigate('ruby-trends');
           if (tab === 'summary') onNavigate('ruby-summary');
         }}
-        labels={{
-          home: 'Home',
-          trends: 'Trends',
-          summary: 'Summary',
-        }}
+        labels={t.nav}
       />
 
       {/* Breathing Exercise Modal */}
       <Dialog open={showBreathing} onOpenChange={setShowBreathing}>
         <DialogContent className="max-w-md">
           <DialogHeader>
-            <DialogTitle>Guided Breathing</DialogTitle>
+            <DialogTitle>{p.breathingTitle}</DialogTitle>
           </DialogHeader>
           <BreathingExercise 
             onComplete={() => {

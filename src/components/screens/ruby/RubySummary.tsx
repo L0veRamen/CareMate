@@ -4,13 +4,16 @@ import { HealthCard } from '../../health/HealthCard';
 import { BottomNav } from '../../health/BottomNav';
 import { Download, TrendingUp } from 'lucide-react';
 import { useApp } from '../../../App';
+import { getTranslation } from '../../../services/translations';
 
 interface RubySummaryProps {
   onNavigate: (screen: string) => void;
 }
 
 export function RubySummary({ onNavigate }: RubySummaryProps) {
-  const { exportPDF } = useApp();
+  const { exportPDF, language } = useApp();
+  const t = getTranslation(language);
+  const p = t.personas.ruby.summary;
   
   const handleExport = async () => {
     try {
@@ -26,8 +29,8 @@ export function RubySummary({ onNavigate }: RubySummaryProps) {
       {/* Header */}
       <div className="bg-white border-b border-[#E5E7EB] px-6 py-6">
         <div className="max-w-md mx-auto">
-          <h1 className="text-gray-900 mb-1">Health Summary</h1>
-          <p className="text-sm text-gray-600">For your healthcare provider</p>
+          <h1 className="text-gray-900 mb-1">{p.title}</h1>
+          <p className="text-sm text-gray-600">{p.subtitle}</p>
         </div>
       </div>
       
@@ -36,23 +39,23 @@ export function RubySummary({ onNavigate }: RubySummaryProps) {
         {/* Patient Info */}
         <HealthCard>
           <div className="space-y-3">
-            <h3 className="text-gray-900 border-b border-[#E5E7EB] pb-3">Patient Information</h3>
+            <h3 className="text-gray-900 border-b border-[#E5E7EB] pb-3">{p.patientInfo}</h3>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
-                <span className="text-gray-600">Name:</span>
+                <span className="text-gray-600">{p.name}</span>
                 <span className="text-gray-900">Ruby Chen</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Age:</span>
-                <span className="text-gray-900">34 years</span>
+                <span className="text-gray-600">{p.age}</span>
+                <span className="text-gray-900">34 {t.units.years}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Primary Concern:</span>
+                <span className="text-gray-600">{p.concern}</span>
                 <span className="text-gray-900">Stress & Sleep</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Period:</span>
-                <span className="text-gray-900">Last 30 days</span>
+                <span className="text-gray-600">{p.period}</span>
+                <span className="text-gray-900">{t.last7Days.replace('7', '30')}</span>
               </div>
             </div>
           </div>
@@ -61,18 +64,18 @@ export function RubySummary({ onNavigate }: RubySummaryProps) {
         {/* Stress Overview */}
         <HealthCard>
           <div className="space-y-3">
-            <h3 className="text-gray-900 border-b border-[#E5E7EB] pb-3">😌 Stress Management</h3>
+            <h3 className="text-gray-900 border-b border-[#E5E7EB] pb-3">{p.stress.title}</h3>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">Average Level</span>
+                <span className="text-sm text-gray-600">{p.stress.avg}</span>
                 <span className="text-[#F59E0B]">Medium</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">High stress days</span>
-                <span className="text-gray-900">40% of days</span>
+                <span className="text-sm text-gray-600">{p.stress.highDays}</span>
+                <span className="text-gray-900">40%</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">Triggers</span>
+                <span className="text-sm text-gray-600">{p.stress.triggers}</span>
                 <span className="text-gray-900">Work deadlines</span>
               </div>
             </div>
@@ -82,19 +85,19 @@ export function RubySummary({ onNavigate }: RubySummaryProps) {
         {/* Sleep Overview */}
         <HealthCard>
           <div className="space-y-3">
-            <h3 className="text-gray-900 border-b border-[#E5E7EB] pb-3">😴 Sleep Patterns</h3>
+            <h3 className="text-gray-900 border-b border-[#E5E7EB] pb-3">{p.sleep.title}</h3>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">Average Duration</span>
-                <span className="text-[#F59E0B]">6.5 hours</span>
+                <span className="text-sm text-gray-600">{p.sleep.avg}</span>
+                <span className="text-[#F59E0B]">6.5 {t.units.hours}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">Quality</span>
+                <span className="text-sm text-gray-600">{p.sleep.quality}</span>
                 <span className="text-gray-900">Fair</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">Recommendation</span>
-                <span className="text-gray-900">Target 7-8 hours</span>
+                <span className="text-sm text-gray-600">{p.sleep.rec}</span>
+                <span className="text-gray-900">Target 7-8 {t.units.hours}</span>
               </div>
             </div>
           </div>
@@ -103,19 +106,19 @@ export function RubySummary({ onNavigate }: RubySummaryProps) {
         {/* Lifestyle Overview */}
         <HealthCard>
           <div className="space-y-3">
-            <h3 className="text-gray-900 border-b border-[#E5E7EB] pb-3">Lifestyle Activities</h3>
+            <h3 className="text-gray-900 border-b border-[#E5E7EB] pb-3">{p.lifestyle.title}</h3>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">💪 Exercise frequency</span>
-                <span className="text-[#10B981]">4.2 times/week</span>
+                <span className="text-sm text-gray-600">{p.lifestyle.exercise}</span>
+                <span className="text-[#10B981]">4.2 /week</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">🧘 Mindfulness practice</span>
-                <span className="text-[#10B981]">12 min/day avg</span>
+                <span className="text-sm text-gray-600">{p.lifestyle.mindfulness}</span>
+                <span className="text-[#10B981]">12 {t.units.minDay}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">📊 Data tracking</span>
-                <span className="text-[#10B981]">87% adherence</span>
+                <span className="text-sm text-gray-600">{p.lifestyle.tracking}</span>
+                <span className="text-[#10B981]">87%</span>
               </div>
             </div>
           </div>
@@ -124,11 +127,9 @@ export function RubySummary({ onNavigate }: RubySummaryProps) {
         {/* Clinical Notes */}
         <HealthCard>
           <div className="space-y-3">
-            <h3 className="text-gray-900 border-b border-[#E5E7EB] pb-3">Clinical Notes</h3>
+            <h3 className="text-gray-900 border-b border-[#E5E7EB] pb-3">{p.clinical.title}</h3>
             <p className="text-sm text-gray-900">
-              Patient reports high work-related stress and insufficient sleep (averaging 6.5 hours). 
-              Positive engagement with mindfulness practices and regular exercise. 
-              Would benefit from sleep hygiene counseling and stress management strategies.
+              {p.clinical.notes}
             </p>
           </div>
         </HealthCard>
@@ -136,12 +137,11 @@ export function RubySummary({ onNavigate }: RubySummaryProps) {
         {/* Recommendations */}
         <HealthCard>
           <div className="space-y-3">
-            <h3 className="text-gray-900 border-b border-[#E5E7EB] pb-3">Recommendations</h3>
+            <h3 className="text-gray-900 border-b border-[#E5E7EB] pb-3">{p.recs.title}</h3>
             <ul className="text-sm text-gray-900 space-y-2 list-disc list-inside">
-              <li>Sleep study to rule out sleep disorders</li>
-              <li>Cognitive behavioral therapy for stress management</li>
-              <li>Continue current exercise and mindfulness routine</li>
-              <li>Follow-up in 3 months to reassess</li>
+              {p.recs.list.map((rec, i) => (
+                <li key={i}>{rec}</li>
+              ))}
             </ul>
           </div>
         </HealthCard>
@@ -154,13 +154,12 @@ export function RubySummary({ onNavigate }: RubySummaryProps) {
           className="w-full flex items-center justify-center gap-2"
         >
           <Download className="w-5 h-5" />
-          Download PDF
+          {t.download}
         </HealthButton>
         
         <div className="bg-[#DBEAFE] rounded-lg p-4">
           <p className="text-sm text-[#1E40AF]">
-            💡 This summary is designed to share with walk-in clinics or specialists 
-            when you don't have a regular family doctor.
+            💡 {p.note}
           </p>
         </div>
       </div>
@@ -172,11 +171,7 @@ export function RubySummary({ onNavigate }: RubySummaryProps) {
           if (tab === 'home') onNavigate('ruby-dashboard');
           if (tab === 'trends') onNavigate('ruby-trends');
         }}
-        labels={{
-          home: 'Home',
-          trends: 'Trends',
-          summary: 'Summary',
-        }}
+        labels={t.nav}
       />
     </div>
   );

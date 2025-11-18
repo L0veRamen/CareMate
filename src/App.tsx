@@ -16,6 +16,7 @@ import { LeoOnboarding } from './components/screens/leo/LeoOnboarding';
 import { LeoTrends } from './components/screens/leo/LeoTrends';
 import { LeoSummary } from './components/screens/leo/LeoSummary';
 import { Users } from 'lucide-react';
+import { getTranslation } from './services/translations';
 
 // Import the services we created
 import { storageService } from './services/storageService';
@@ -84,6 +85,7 @@ export default function App() {
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
   const [aiInsight, setAIInsight] = useState<AIInsight | null>(null);
   const [language, setLanguage] = useState<Language>('en');
+  const t = getTranslation(language);
 
   // Initialize app - check if user already exists
   useEffect(() => {
@@ -292,7 +294,6 @@ export default function App() {
     }
   };
 
-  // Persona selection screen with updated info
   if (screen === 'persona-select') {
     return (
       <div className="min-h-screen bg-[#F9FAFB] flex flex-col items-center justify-center p-6">
@@ -303,14 +304,14 @@ export default function App() {
                 <Users className="w-10 h-10 text-white" />
               </div>
             </div>
-            <h1 className="text-3xl font-bold text-gray-900">Select a Persona</h1>
+            <h1 className="text-3xl font-bold text-gray-900">{t.selectPersona}</h1>
             <p className="text-gray-600">
-              Choose a user profile to explore CareMate with realistic health data
+              {t.personaDescription}
             </p>
           </div>
 
           <div className="space-y-4">
-            {/* André - Updated to match our persona data */}
+            {/* André */}
             <button
               onClick={() => handlePersonaSelect('andre')}
               className="w-full p-6 bg-white rounded-xl border-2 border-[#E5E7EB] hover:border-[#2563EB] transition-all text-left"
@@ -319,18 +320,18 @@ export default function App() {
                 <span className="text-4xl">👨‍💼</span>
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-gray-900 mb-1">André (72)</h3>
-                  <p className="text-sm text-gray-600 mb-2">Manager with Type 2 Diabetes</p>
+                  <p className="text-sm text-gray-600 mb-2">{t.personaSelection.andre.desc}</p>
                   <div className="flex flex-wrap gap-2">
                     <span className="px-2 py-1 bg-[#DBEAFE] text-[#2563EB] rounded text-xs font-medium">Français</span>
                     <span className="px-2 py-1 bg-[#DBEAFE] text-[#2563EB] rounded text-xs font-medium">English</span>
-                    <span className="px-2 py-1 bg-[#FEE2E2] text-[#EF4444] rounded text-xs font-medium">Diabetes</span>
+                    <span className="px-2 py-1 bg-[#FEE2E2] text-[#EF4444] rounded text-xs font-medium">{t.personaSelection.andre.tag}</span>
                   </div>
-                  <p className="text-xs text-gray-500 mt-2">7 days of glucose & BP tracking</p>
+                  <p className="text-xs text-gray-500 mt-2">7 {t.units.days} {t.personaSelection.tracking}</p>
                 </div>
               </div>
             </button>
 
-            {/* Ruby - Updated to match our persona data */}
+            {/* Ruby */}
             <button
               onClick={() => handlePersonaSelect('ruby')}
               className="w-full p-6 bg-white rounded-xl border-2 border-[#E5E7EB] hover:border-[#2563EB] transition-all text-left"
@@ -339,17 +340,17 @@ export default function App() {
                 <span className="text-4xl">👩</span>
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-gray-900 mb-1">Ruby (34)</h3>
-                  <p className="text-sm text-gray-600 mb-2">Young Professional - Recently diagnosed with hypertension, managing work stress</p>
+                  <p className="text-sm text-gray-600 mb-2">{t.personaSelection.ruby.desc}</p>
                   <div className="flex flex-wrap gap-2">
                     <span className="px-2 py-1 bg-[#DBEAFE] text-[#2563EB] rounded text-xs font-medium">English</span>
-                    <span className="px-2 py-1 bg-[#FEF3C7] text-[#F59E0B] rounded text-xs font-medium">Hypertension</span>
+                    <span className="px-2 py-1 bg-[#FEF3C7] text-[#F59E0B] rounded text-xs font-medium">{t.personaSelection.ruby.tag}</span>
                   </div>
-                  <p className="text-xs text-gray-500 mt-2">7 days of BP & activity tracking</p>
+                  <p className="text-xs text-gray-500 mt-2">7 {t.units.days} {t.personaSelection.tracking}</p>
                 </div>
               </div>
             </button>
 
-            {/* Leo - Updated to match our persona data */}
+            {/* Leo */}
             <button
               onClick={() => handlePersonaSelect('leo')}
               className="w-full p-6 bg-white rounded-xl border-2 border-[#E5E7EB] hover:border-[#2563EB] transition-all text-left"
@@ -358,12 +359,12 @@ export default function App() {
                 <span className="text-4xl">🧑‍🎓</span>
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-gray-900 mb-1">Leo (17)</h3>
-                  <p className="text-sm text-gray-600 mb-2">Student Managing Exam Stress</p>
+                  <p className="text-sm text-gray-600 mb-2">{t.personaSelection.leo.desc}</p>
                   <div className="flex flex-wrap gap-2">
                     <span className="px-2 py-1 bg-[#DBEAFE] text-[#2563EB] rounded text-xs font-medium">English</span>
-                    <span className="px-2 py-1 bg-[#D1FAE5] text-[#10B981] rounded text-xs font-medium">Student Health</span>
+                    <span className="px-2 py-1 bg-[#D1FAE5] text-[#10B981] rounded text-xs font-medium">{t.personaSelection.leo.tag}</span>
                   </div>
-                  <p className="text-xs text-gray-500 mt-2">7 days of stress & sleep tracking</p>
+                  <p className="text-xs text-gray-500 mt-2">7 {t.units.days} {t.personaSelection.tracking}</p>
                 </div>
               </div>
             </button>
@@ -373,14 +374,13 @@ export default function App() {
             onClick={handleReset}
             className="w-full text-sm text-gray-600 hover:text-gray-900 transition-colors"
           >
-            ← Back to Language Selection
+            {t.backToLanguage}
           </button>
         </div>
       </div>
     );
   }
 
-  // Wrap everything in AppContext provider
   return (
     <AppContext.Provider value={contextValue}>
       {screen === 'language' && (
